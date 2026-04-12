@@ -3,9 +3,9 @@ import yfinance as yf
 import pandas as pd
 import os
 
-# -------------------------------
+
 # 1. PARSE ARGUMENTS
-# -------------------------------
+
 def parse_args():
     parser = argparse.ArgumentParser(description="Fetch, filter, and store OHLCV data")
 
@@ -26,9 +26,8 @@ def parse_args():
     return parser.parse_args()
 
 
-# -------------------------------
+
 # 2. CALL API
-# -------------------------------
 def fetch_ohlcv_data(tickers, start, end):
     all_data = []
 
@@ -57,9 +56,9 @@ def fetch_ohlcv_data(tickers, start, end):
     return pd.concat(all_data, ignore_index=True)
 
 
-# -------------------------------
+
 # 3. FILTER DATA
-# -------------------------------
+
 def filter_data(data, start, end, min_price, max_price, min_volume):
     data["Date"] = pd.to_datetime(data["Date"])
 
@@ -87,18 +86,18 @@ def filter_data(data, start, end, min_price, max_price, min_volume):
     return data
 
 
-# -------------------------------
+
 # 4. STORE DATA
-# -------------------------------
+
 def store_data(data, output_path):
     os.makedirs(os.path.dirname(output_path), exist_ok=True)
     data.to_parquet(output_path)
     print(f"Saved data to {output_path}")
 
 
-# -------------------------------
+
 # MAIN PIPELINE
-# -------------------------------
+
 def main():
     args = parse_args()
 

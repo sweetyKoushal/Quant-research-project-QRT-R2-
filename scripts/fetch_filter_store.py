@@ -40,6 +40,8 @@ def fetch_ohlcv_data(tickers, start, end):
             if df.empty:
                 continue
 
+            df.columns = df.columns.get_level_values(0)
+
             df = df.reset_index()
             df["ticker"] = ticker
 
